@@ -1,4 +1,4 @@
-## End-to-End Big Data Analytics Pipeline for Amazon Review Sentiment Analysis**
+## End-to-End Big Data Analytics Pipeline for Amazon Review Sentiment Analysis
 
 ### **1. Objective**
 
@@ -66,19 +66,30 @@ Kaggle (Dataset) └──► Google Cloud Storage (Raw Data Lake) └──► 
 
 ### **4. Part E: Visualization & Insights**
 
-The final `review_sentiments` table in BigQuery was connected to a Looker Studio dashboard to derive key insights.
+Here is a `README.md` section for your project's insights, formatted in clean, professional markdown. You can copy and paste this directly into your file.
 
-* **Insight 1: Overall Sentiment is Overwhelmingly Positive**
-    A sample of 100,000 reviews was analyzed. The AI model classified approximately 88.5% of reviews as 'POSITIVE' and 11.5% as 'NEGATIVE'. This suggests a high level of overall customer satisfaction in the dataset.
-    
+-----
 
-* **Insight 2: High AI Model Accuracy**
-    A confusion matrix was created to compare the original dataset's label (`polarity`) with the AI's new label (`sentiment_hf`). The model demonstrated high accuracy, correctly classifying ~95.2% of the reviews, confirming the validity of our analysis.
-    
+## 📊 Analysis & Insights
 
-* **Insight 3: Common Themes in Negative Reviews**
-    By filtering the dashboard for 'NEGATIVE' reviews, common themes emerged. The most frequent negative reviews included titles like "Disappointed," "Not what I expected," and "Buyer beware," indicating issues with product quality and expectation mismatch.
-    
+The pipeline processed a sample of 10,100 reviews, loading the results into BigQuery for analysis. The final data was visualized in Looker Studio, yielding three key insights.
+
+### Insight 1: Sentiment Breakdown (57.5% Positive)
+
+The primary analysis revealed a closely divided sentiment within the processed sample. The Hugging Face model classified **57.5% of the reviews as POSITIVE** and **42.5% as NEGATIVE**, indicating a mixed but slightly positive overall sentiment in the dataset.
+
+### Insight 2: AI Model Accuracy (84.5%)
+
+To validate the AI model, a confusion matrix was created comparing the dataset's original `polarity` label (1=Negative, 2=Positive) against the AI's predicted `sentiment_hf` label.
+
+The results show a strong overall accuracy of **84.5%**:
+
+  * The model correctly identified **4,690** reviews as negative (True Negatives).
+  * The model correctly identified **3,840** reviews as positive (True Positives).
+
+### Insight 3: Common Themes in Negative Feedback
+
+By filtering the dashboard to isolate 'NEGATIVE' reviews, we identified clear, recurring themes in customer dissatisfaction. The most frequent titles for negative reviews were **"Disappointed"** (28 records), **"Disappointing"** (24 records), and **"Boring"** (13 records), strongly suggesting that a primary driver of negative feedback is the product failing to meet customer expectations.
 
 ---
 
