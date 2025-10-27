@@ -1,0 +1,65 @@
+version: '3'
+x-airflow-common:
+  &airflow-common
+  image: apache/airflow:2.5.0
+  user: "${AIRFLOW_UID:-50000}"
+  environment:
+    # Set the executor to LocalExecutor
+    - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+    - AIRFLOW__CORE__LOAD_EXAMPLES=False
+    - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=True
+    # Tell Airflow to use Postgres, not the default SQLite
+    - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+    - AIRFLOW__DATABASE__LOAD_DEFAULT_CONNECTIONS=False
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./logs:/opt/airflow/logs
+    - ./plugins:/opt/airflow/plugins
+  depends_on:
+    - postgres
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    ports:
+      - "5432:5432"
+
+  airflow-init:
+    <<: *airflow-common
+    container_name: airflow_init
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        mkdir -p /opt/airflow/dags /opt/airflow/logs /opt/airflow/plugins
+        # The chown line is removed/fixed for Windows compatibility
+        airflow db init
+        airflow users create --role Admin --username admin --email admin@example.com --firstname Admin --lastname User --password admin
+
+  airflow-webserver:
+    <<: *airflow-common
+    container_name: airflow_webserver
+    restart: always
+    command: airflow webserver
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  airflow-scheduler:
+    <<: *airflow-common
+    container_name: airflow_scheduler
+    restart: always
+    command: airflow scheduler
+    healthcheck:
+      test: ["CMD", "airflow", "tasks", "list"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
