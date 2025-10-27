@@ -1,7 +1,3 @@
-Here is a comprehensive final report for your assignment. Below the report, you'll find a clear checklist of exactly what you need to screenshot and attach as proof of your work.
-
----
-
 ## End-to-End Big Data Analytics Pipeline for Amazon Review Sentiment Analysis**
 
 ### **1. Objective**
@@ -17,9 +13,7 @@ The pipeline was designed as a scalable, automated batch-processing system.
 #### **2.1. Pipeline Flowchart (DAG)**
 The logical flow of data is as follows:
 
-
-
-`Kaggle (Dataset)` $\rightarrow$ `Google Cloud Storage (Raw Data Lake)` $\rightarrow$ `Airflow / gsutil (Staging)` $\rightarrow$ `Apache Spark (Process & Analyze)` $\rightarrow$ `GCS (Processed Results)` $\rightarrow$ `Google BigQuery (Data Warehouse)` $\rightarrow$ `Looker Studio (Visualization)`
+Kaggle (Dataset) └──► Google Cloud Storage (Raw Data Lake) └──► Airflow / gsutil (Staging) └──► Apache Spark (Process & Analyze) └──► GCS (Processed Results) └──► Google BigQuery (Data Warehouse) └──► Looker Studio (Visualization)
 
 #### **2.2. Technology Stack**
 * **Data Source:** Kaggle (Amazon Review Polarity Dataset)
