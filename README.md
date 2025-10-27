@@ -15,6 +15,9 @@ The logical flow of data is as follows:
 
 Kaggle (Dataset) └──► Google Cloud Storage (Raw Data Lake) └──► Airflow / gsutil (Staging) └──► Apache Spark (Process & Analyze) └──► GCS (Processed Results) └──► Google BigQuery (Data Warehouse) └──► Looker Studio (Visualization)
 
+<img width="480" height="480" alt="Gemini_Generated_Image_m0a8ebm0a8ebm0a8" src="https://github.com/user-attachments/assets/e3f07176-94c0-4670-9998-faae78fa5d2a" />
+
+
 #### **2.2. Technology Stack**
 * **Data Source:** Kaggle (Amazon Review Polarity Dataset)
 * **Data Lake:** Google Cloud Storage (GCS)
