@@ -32,7 +32,7 @@ Kaggle (Dataset) └──► Google Cloud Storage (Raw Data Lake) └──► 
 ### **3. Implementation & Execution**
 
 #### **Part A: Data Ingestion**
-1.  **Dataset:** The **"Amazon Review Polarity"** dataset from Kaggle was selected. It contains 4,000,000 records (3,600,000 training, 400,000 test), easily meeting the "> 1 million records" requirement.
+1.  **Dataset:** The **"Amazon Review Polarity"** dataset <a href="https://www.kaggle.com/datasets/kritanjalijain/amazon-reviews?resource=download" title=""></a><br>from <a href="" target="_blank">Kaggle</a> was selected. It contains 4,000,000 records (3,600,000 training, 400,000 test), easily meeting the "> 1 million records" requirement.
 2.  **Loading:** The data was batch-loaded using Apache Spark.
 3.  **Data Lake:** The raw `train.csv` and `test.csv` files were uploaded and stored in a Google Cloud Storage (GCS) bucket (`big-data-project-taha`), which serves as our central data lake.
 
@@ -66,19 +66,13 @@ Kaggle (Dataset) └──► Google Cloud Storage (Raw Data Lake) └──► 
 
 ### **4. Part E: Visualization & Insights**
 
-Here is a `README.md` section for your project's insights, formatted in clean, professional markdown. You can copy and paste this directly into your file.
-
------
-
-## 📊 Analysis & Insights
-
 The pipeline processed a sample of 10,100 reviews, loading the results into BigQuery for analysis. The final data was visualized in Looker Studio, yielding three key insights.
 
-### Insight 1: Sentiment Breakdown (57.5% Positive)
+### Insight 1: Overall Sentiment is Primarily Negative (57.5%)
 
-The primary analysis revealed a closely divided sentiment within the processed sample. The Hugging Face model classified **57.5% of the reviews as POSITIVE** and **42.5% as NEGATIVE**, indicating a mixed but slightly positive overall sentiment in the dataset.
+The primary analysis revealed a clear negative sentiment within the processed sample. The Hugging Face model classified **57.5% of the reviews as NEGATIVE** (5,807 records) and only **42.5% as POSITIVE** (4,293 records).
 
-### Insight 2: AI Model Accuracy (84.5%)
+### Insight 2: AI Model Accuracy is 84.5%
 
 To validate the AI model, a confusion matrix was created comparing the dataset's original `polarity` label (1=Negative, 2=Positive) against the AI's predicted `sentiment_hf` label.
 
@@ -90,8 +84,6 @@ The results show a strong overall accuracy of **84.5%**:
 ### Insight 3: Common Themes in Negative Feedback
 
 By filtering the dashboard to isolate 'NEGATIVE' reviews, we identified clear, recurring themes in customer dissatisfaction. The most frequent titles for negative reviews were **"Disappointed"** (28 records), **"Disappointing"** (24 records), and **"Boring"** (13 records), strongly suggesting that a primary driver of negative feedback is the product failing to meet customer expectations.
-
----
 
 ### **5. Conclusion**
 
